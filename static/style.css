@@ -1,0 +1,46 @@
+/* Exercise emoji ki floating animation */
+.exercise-anim {
+    animation: floatUpDown 2s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-10px) rotate(5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Card hover par scale */
+.exercise-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.exercise-card:hover {
+    transform: scale(1.05);
+}
+
+/* Pulse animation pushup ke liye */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.2); }
+}
+.pulse-anim {
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* Water tracker wave animation */
+.water-wave {
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 25 20, 50 10 T 100 10 V 20 H 0 Z" fill="%2300bcd4"/></svg>');
+    background-size: 100px 20px;
+    animation: wave 3s linear infinite;
+}
+
+@keyframes wave {
+    0% { background-position-x: 0; }
+    100% { background-position-x: 100px; }
+}
+
+.exercise-card {
+    transition: transform 0.3s ease;
+}
+.exercise-card:hover {
+    transform: translateY(-5px);
+}

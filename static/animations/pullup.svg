@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Bar (fixed) -->
+  <line x1="40" y1="30" x2="160" y2="30" stroke="#333" stroke-width="6" stroke-linecap="round"/>
+  <line x1="40" y1="30" x2="40" y2="20" stroke="#333" stroke-width="4"/>
+  <line x1="160" y1="30" x2="160" y2="20" stroke="#333" stroke-width="4"/>
+  
+  <!-- Whole body group moves up-down -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" 
+                      values="0 0; 0 -40; 0 0" dur="2.5s" repeatCount="indefinite"/>
+    
+    <!-- Arms (fixed at bar, hanging) -->
+    <line x1="85" y1="30" x2="85" y2="70" stroke="#9c27b0" stroke-width="5" stroke-linecap="round"/>
+    <line x1="115" y1="30" x2="115" y2="70" stroke="#9c27b0" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Head -->
+    <circle cx="100" cy="80" r="12" fill="#9c27b0"/>
+    
+    <!-- Torso -->
+    <line x1="100" y1="92" x2="100" y2="150" stroke="#9c27b0" stroke-width="7" stroke-linecap="round"/>
+    
+    <!-- Legs -->
+    <line x1="100" y1="150" x2="85" y2="185" stroke="#9c27b0" stroke-width="5" stroke-linecap="round"/>
+    <line x1="100" y1="150" x2="115" y2="185" stroke="#9c27b0" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
