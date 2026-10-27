@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitIndia - Complete Fitness</title>
+    <title>FitIndia Pro - Complete Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    colors: { dark: '#0f172a', darker: '#020617', neon: '#ff5722', neonred: '#e11d48' }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-50 dark:bg-dark text-gray-800 dark:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-500 min-h-screen">
+
+    <!-- Background Glows (Only visible in dark mode) -->
+    <div class="hidden dark:block fixed top-0 left-1/4 w-96 h-96 bg-neon rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none"></div>
+    <div class="hidden dark:block fixed bottom-0 right-1/4 w-96 h-96 bg-neonred rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none"></div>
 
     <!-- HEADER -->
-    <header class="bg-gradient-to-r from-orange-500 to-red-600 text-white p-5 shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">💪 FitIndia</h1>
-            <nav class="flex gap-4 items-center">
-                <a href="/" class="hover:underline font-semibold">Home / होम</a>
-                <a href="/diet.html" class="hover:underline font-semibold">Diet / आहार</a>
-                <button id="langBtn" class="bg-white text-orange-600 px-4 py-1 rounded-full font-semibold hover:bg-gray-200 transition">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-dark/80 border-b border-gray-200 dark:border-white/10 transition-colors">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                Fit<span class="text-neon">India</span><span class="text-xs align-top text-gray-500 ml-1">PRO</span>
+            </h1>
+            <nav class="flex gap-4 md:gap-6 items-center font-semibold">
+                <a href="/" class="text-neon hover:text-orange-600 transition">Home</a>
+                <a href="/diet.html" class="text-gray-600 dark:text-gray-300 hover:text-neon transition">Diet Plan</a>
+                
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="text-xl p-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition">🌙</button>
+                
+                <!-- Language Toggle -->
+                <button id="langBtn" class="bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 border border-gray-300 dark:border-white/20 px-4 py-1.5 rounded-full text-sm transition-all duration-300">
                     हिंदी
                 </button>
             </nav>
@@ -24,51 +48,59 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="text-center py-10 px-4">
-        <h2 class="text-4xl font-bold text-gray-800 mb-3" data-en="Get Fit, Stay Strong" data-hi="फिट रहें, मजबूत रहें">Get Fit, Stay Strong</h2>
-        <p class="text-gray-600 text-lg" data-en="Your complete fitness companion" data-hi="आपका पूरा फिटनेस साथी">Your complete fitness companion</p>
+    <section class="text-center pt-16 pb-8 px-4 relative z-10">
+        <h2 class="text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white" data-en="Get Fit, Stay Strong" data-hi="फिट रहें, मजबूत रहें">Get Fit, Stay Strong</h2>
+        <p class="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-6" data-en="Your complete fitness companion. Track, Train, and Transform." data-hi="आपका पूरा फिटनेस साथी। ट्रैक करें, ट्रेन करें और बदलें।">Your complete fitness companion. Track, Train, and Transform.</p>
+        
+        <!-- STREAK TRACKER -->
+        <div class="inline-flex items-center gap-3 bg-orange-100 dark:bg-neon/10 border border-orange-300 dark:border-neon/30 px-6 py-2 rounded-full text-orange-600 dark:text-neon font-bold shadow-sm">
+            <span class="text-2xl">🔥</span>
+            <span>Daily Streak: <span id="streakCount">1</span> Days</span>
+        </div>
     </section>
 
-    <!-- NEW FEATURES DASHBOARD (3 Columns) -->
-    <section class="max-w-6xl mx-auto px-4 mb-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- DASHBOARD TOOLS -->
+    <section class="max-w-7xl mx-auto px-6 mb-12 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             <!-- 1. BMI CALCULATOR -->
-            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
-                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">⚖️ BMI Calculator</h3>
-                <div class="space-y-3">
-                    <input type="number" id="weight" placeholder="Weight (kg)" class="w-full border p-2 rounded focus:outline-blue-500">
-                    <input type="number" id="height" placeholder="Height (cm)" class="w-full border p-2 rounded focus:outline-blue-500">
-                    <button onclick="calculateBMI()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">Calculate BMI</button>
-                    <div id="bmiResult" class="text-center font-bold text-lg text-blue-700 mt-2 hidden"></div>
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden group bg-white dark:bg-transparent">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3"><span class="p-2 bg-blue-100 dark:bg-blue-500/20 rounded-lg text-blue-600 dark:text-blue-400">⚖️</span> BMI Calculator</h3>
+                <div class="space-y-4 relative z-10">
+                    <input type="number" id="weight" placeholder="Weight (kg)" class="w-full bg-gray-100 dark:bg-darker/50 border border-gray-300 dark:border-white/10 p-3 rounded-xl focus:outline-none focus:border-blue-500 text-gray-900 dark:text-white transition">
+                    <input type="number" id="height" placeholder="Height (cm)" class="w-full bg-gray-100 dark:bg-darker/50 border border-gray-300 dark:border-white/10 p-3 rounded-xl focus:outline-none focus:border-blue-500 text-gray-900 dark:text-white transition">
+                    <button onclick="calculateBMI()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition shadow-lg">Calculate</button>
+                    <div id="bmiResult" class="text-center font-bold text-lg text-blue-600 dark:text-blue-400 mt-2 hidden p-3 bg-blue-50 dark:bg-blue-500/10 rounded-xl"></div>
                 </div>
             </div>
 
             <!-- 2. WATER TRACKER -->
-            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-cyan-500 relative overflow-hidden">
-                <!-- Background water wave animation -->
-                <div class="water-wave absolute bottom-0 left-0 w-full h-8 bg-cyan-200 opacity-50 z-0"></div>
-                <div class="relative z-10">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">💧 Water Tracker</h3>
-                    <div class="text-center">
-                        <p class="text-4xl font-bold text-cyan-600 mb-2" id="waterCount">0 / 8</p>
-                        <p class="text-sm text-gray-500 mb-4">Glasses aaj piye</p>
-                        <div class="flex justify-center gap-2">
-                            <button onclick="updateWater(-1)" class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">-</button>
-                            <button onclick="updateWater(1)" class="bg-cyan-500 text-white px-6 py-2 rounded hover:bg-cyan-600 transition">+ Add Glass</button>
-                        </div>
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden group bg-white dark:bg-transparent">
+                <div class="absolute bottom-0 left-0 w-full h-12 water-wave opacity-10 dark:opacity-20"></div>
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3 relative z-10"><span class="p-2 bg-cyan-100 dark:bg-cyan-500/20 rounded-lg text-cyan-600 dark:text-cyan-400">💧</span> Water Tracker</h3>
+                <div class="text-center relative z-10">
+                    <p class="text-6xl font-extrabold text-cyan-600 dark:text-cyan-400 mb-2" id="waterCount">0/8</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Glasses aaj piye</p>
+                    <div class="flex justify-center gap-3">
+                        <button onclick="updateWater(-1)" class="bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 px-5 py-3 rounded-xl transition text-xl">-</button>
+                        <button onclick="updateWater(1)" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-8 py-3 rounded-xl transition shadow-lg">+ Add Glass</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. WORKOUT TIMER -->
-            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
-                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">⏱️ Workout Timer</h3>
-                <div class="text-center">
-                    <p class="text-5xl font-mono font-bold text-purple-700 mb-4" id="timerDisplay">00:00</p>
-                    <div class="flex justify-center gap-2">
-                        <button onclick="startTimer()" id="startBtn" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition w-full">Start</button>
-                        <button onclick="resetTimer()" class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 w-full">Reset</button>
+            <!-- 3. WORKOUT TIMER & MUSIC -->
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden group bg-white dark:bg-transparent">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3 relative z-10"><span class="p-2 bg-purple-100 dark:bg-purple-500/20 rounded-lg text-purple-600 dark:text-purple-400">⏱️</span> Timer & Music</h3>
+                <div class="text-center relative z-10">
+                    <p class="text-5xl font-mono font-extrabold text-purple-600 dark:text-purple-400 mb-4" id="timerDisplay">00:00</p>
+                    <div class="flex justify-center gap-3 mb-4">
+                        <button onclick="startTimer()" id="startBtn" class="flex-1 bg-purple-600 hover:bg-purple-500 text-white font-bold py-2 rounded-xl transition shadow-lg">Start</button>
+                        <button onclick="resetTimer()" class="flex-1 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 font-bold py-2 rounded-xl transition">Reset</button>
+                    </div>
+                    <!-- Music Player UI -->
+                    <div class="flex items-center justify-center gap-3 bg-gray-100 dark:bg-darker/50 p-2 rounded-xl border border-gray-200 dark:border-white/10">
+                        <button onclick="toggleMusic()" id="musicBtn" class="text-2xl hover:scale-110 transition">▶️</button>
+                        <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">Workout Beats 🎵</span>
                     </div>
                 </div>
             </div>
@@ -77,16 +109,32 @@
     </section>
 
     <!-- EXERCISES SECTION -->
-    <section class="max-w-6xl mx-auto px-4 pb-12">
-        <h3 class="text-2xl font-bold text-gray-800 mb-6" data-en="🏋️ Exercises" data-hi="🏋️ व्यायाम">🏋️ Exercises</h3>
-        <div id="exerciseList" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <p class="text-gray-500">Loading exercises...</p>
-        </div>
+    <section class="max-w-7xl mx-auto px-6 pb-20 relative z-10">
+        <h3 class="text-3xl font-bold mb-8 flex items-center gap-3 text-gray-900 dark:text-white" data-en="🏋️ Exercises" data-hi="🏋️ व्यायाम">🏋️ Exercises</h3>
+        <div id="exerciseList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <footer class="bg-gray-800 text-white text-center py-4 mt-10">
-        <p>© 2026 FitIndia — Made with ❤️</p>
+    <!-- CALORIE POPUP (MODAL) -->
+    <div id="calorieModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-dark border border-gray-300 dark:border-white/10 rounded-3xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="modalContent">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" id="modalTitle">Calculate Calories</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">Apna weight daalein aur jaanein ki is exercise se aap kitni calories burn karenge (15 mins me).</p>
+            <input type="number" id="modalWeight" placeholder="Your Weight (kg)" class="w-full bg-gray-100 dark:bg-darker/50 border border-gray-300 dark:border-white/10 p-4 rounded-xl mb-4 focus:outline-none focus:border-neon text-gray-900 dark:text-white transition">
+            <button onclick="calculateCalories()" class="w-full bg-neon hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition shadow-lg">Calculate Now</button>
+            <div id="calorieResult" class="mt-4 text-center font-bold text-xl text-neon hidden"></div>
+        </div>
+    </div>
+
+    <footer class="border-t border-gray-200 dark:border-white/10 py-8 text-center text-gray-500 relative z-10">
+        <p>© 2026 FitIndia Pro. Made with ❤️</p>
     </footer>
+
+    <!-- Audio Element for Music -->
+    <audio id="bgMusic" loop>
+        <!-- Yahan koi bhi royalty-free music ka link daal sakte hain, abhi ke liye placeholder hai -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="/static/script.js"></script>
 </body>

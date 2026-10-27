@@ -3,39 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diet - FitIndia</title>
+    <title>Diet Plan - FitIndia Pro</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
+    
+    <!-- Tailwind Custom Theme Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    colors: {
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        neon: '#ff5722',
+                        neonred: '#e11d48'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-dark text-white font-sans antialiased overflow-x-hidden relative min-h-screen">
 
-    <header class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-5 shadow-lg">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">💪 FitIndia</h1>
-            <nav class="flex gap-4 items-center">
-                <a href="/" class="hover:underline">Home / होम</a>
-                <a href="/diet.html" class="hover:underline">Diet / आहार</a>
-                <button id="langBtn" 
-                        class="bg-white text-green-600 px-4 py-1 rounded-full font-semibold hover:bg-gray-200">
+    <!-- Background Glow Effects -->
+    <div class="fixed top-0 right-1/4 w-96 h-96 bg-green-500 rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-dark/80 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold tracking-tight">
+                Fit<span class="text-neon">India</span><span class="text-xs align-top text-gray-400 ml-1">PRO</span>
+            </h1>
+            <nav class="flex gap-6 items-center font-semibold">
+                <a href="/" class="text-gray-300 hover:text-white transition">Home</a>
+                <a href="/diet.html" class="text-green-400 hover:text-white transition">Diet Plan</a>
+                <button id="langBtn" class="bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-1.5 rounded-full text-sm transition-all duration-300">
                     हिंदी
                 </button>
             </nav>
         </div>
     </header>
 
-    <section class="max-w-6xl mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center"
-            data-en="🥗 Diet & Nutrition Guide"
-            data-hi="🥗 आहार और पोषण गाइड">
-            🥗 Diet & Nutrition Guide
+    <!-- HERO SECTION -->
+    <section class="text-center pt-16 pb-12 px-4 relative z-10">
+        <h2 class="text-5xl font-extrabold mb-4 text-white" 
+            data-en="🥗 Diet & Nutrition" data-hi="🥗 आहार और पोषण">
+            🥗 Diet & Nutrition
         </h2>
-        <div id="dietList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <p class="text-gray-500">Loading diet tips...</p>
+        <p class="text-gray-400 text-lg" 
+           data-en="Fuel your body with the right nutrition." 
+           data-hi="सही पोषण के साथ अपने शरीर को ऊर्जा दें।">
+            Fuel your body with the right nutrition.
+        </p>
+    </section>
+
+    <!-- DIET CARDS SECTION -->
+    <section class="max-w-7xl mx-auto px-6 pb-20 relative z-10">
+        <div id="dietList" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Cards JavaScript se load honge -->
+            <p class="text-gray-500 text-center col-span-2">Loading diet plans...</p>
         </div>
     </section>
 
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p>© 2026 FitIndia</p>
+    <footer class="border-t border-white/10 py-8 text-center text-gray-500 relative z-10 mt-auto">
+        <p>© 2026 FitIndia Pro. Made with ❤️</p>
     </footer>
 
     <script src="/static/script.js"></script>
